@@ -1,0 +1,158 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="AUTHOR" content="Vivo6810">
+        <meta name="onemainworld" content="minecraft server">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png" href="images/favicon-32x32.png">
+        <title>ONEMAINWORLD</title>
+    </head>
+    <body>
+        <div id="introAnimation">
+            <div id="faviconContainer">
+                <img src="images/omw.png" alt="favicon" id="animatedFavicon">
+                <div class="ripple" style="animation-delay: 0.85s"></div>
+                <div class="ripple" style="animation-delay: 1.15s"></div>
+                <div class="ripple" style="animation-delay: 1.45s"></div>
+                <div class="ripple" style="animation-delay: 1.75s"></div>
+                <div class="ripple" style="animation-delay: 2.05s"></div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <image src="images/omw.png" width="25" height="25"></image>
+                <h2 class="nav-title">ONEMAINWORLD</h2>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rules.html">Rules</a></li>
+                    <li><a href="https://onemainworld-shop.fourthwall.com/?utm_source=linktree&utm_medium=referral&utm_campaign=linktree_shop_other_products">Merch</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="https://discord.gg/UcVYUmC7" target="_blank">Discord</a></li>
+                    <li><a href="https://www.instagram.com/onemainworld?igsh=MWVzdGdiajJwN2gwag==" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://youtube.com/@onemainworld?si=96TIcCY_Vne8jfEo" target="_blank">YouTube</a></li>
+                    <li><a href="https://onemainworld-shop.tebex.io">Shop</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">🌙</button></li>
+                </ul>
+            </div>
+        </nav>
+        <image src="images/img2.webp" width="100%" height="auto" id="main-image" style="max-height: 250px; object-fit: cover;"></image>
+
+        <!-- Main Content -->
+        <div class="container">
+            <!-- Left Content -->
+            <div class="main-content">
+                <div class="content-card">
+                    <h3>Welcome to ONEMAINWORLD</h3>
+                    <p>Welcome to onemainworld, your gateway to a Minecraft universe like no other. Dive into a limitless realm of opportunities and captivating adventures, tailored to both seasoned veterans and newcomers alike.</p>
+                </div>
+
+                <!-- Live Player Count -->
+                <div class="content-card" style="padding: 20px;">
+                    <h3 style="margin-bottom: 20px;">🎮 Live Players</h3>
+                    <div id="playerCountContainer">
+                        <div style="color: #b0b0b0; text-align: center; padding: 15px;">Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <aside class="sidebar">
+                <div class="server-card">
+                    <h3>Server Info</h3>
+                    <div class="server-entry">
+                        <label>Java Edition</label>
+                        <div class="ip-display" onclick="copyText(this)">onemainworld.net</div>
+                    </div>
+                    <div class="server-entry">
+                        <label>Bedrock Edition</label>
+                        <div class="ip-display" onclick="copyText(this)">onemainworld.net</div>
+                    </div>
+                    <div class="server-entry">
+                        <label>Bedrock Port</label>
+                        <div class="ip-display" onclick="copyText(this)">19132</div>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+
+        <script>
+            function copyText(element) {
+                const text = element.textContent;
+                navigator.clipboard.writeText(text);
+                element.style.backgroundColor = '#90EE90';
+                setTimeout(() => {
+                    element.style.backgroundColor = '#d3d3d3';
+                }, 500);
+            }
+
+            // Fetch live player count
+            function fetchPlayerCount() {
+                fetch('https://api.mcsrvstat.us/2/onemainworld.net')
+                    .then(response => response.json())
+                    .then(data => {
+                        const container = document.getElementById('playerCountContainer');
+                        if (data.online) {
+                            const players = data.players.online || 0;
+                            const maxPlayers = data.players.max || 'Unknown';
+                            const playerPercentage = Math.round((players / maxPlayers) * 100) || 0;
+                            
+                            container.innerHTML = `
+                                <div style="padding: 15px; text-align: center;">
+                                    <div style="font-size: 32px; color: #00ccff; font-weight: bold; margin-bottom: 10px;">${players}</div>
+                                    <div style="color: #b0b0b0; margin-bottom: 12px;">Players Online</div>
+                                    <div style="color: #888; font-size: 12px; margin-bottom: 12px;">Max: ${maxPlayers}</div>
+                                    <div style="background: rgba(0, 204, 255, 0.1); border-radius: 8px; overflow: hidden; height: 6px; margin-bottom: 8px;">
+                                        <div style="background: linear-gradient(90deg, #00ccff, #0099ff); height: 100%; width: ${playerPercentage}%;"></div>
+                                    </div>
+                                    <div style="color: #666; font-size: 11px;">${playerPercentage}% Full</div>
+                                </div>
+                            `;
+                        } else {
+                            container.innerHTML = `
+                                <div style="color: #ff6666; text-align: center; padding: 15px;">
+                                    Server Offline
+                                </div>
+                            `;
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById('playerCountContainer').innerHTML = `
+                            <div style="color: #888; text-align: center; padding: 15px; font-size: 12px;">
+                                Unable to fetch<br>player count
+                            </div>
+                        `;
+                        console.log('Player count fetch error:', error);
+                    });
+            }
+
+            // Fetch on page load
+            window.addEventListener('load', fetchPlayerCount);
+
+            // Refresh player count every 30 seconds
+            setInterval(fetchPlayerCount, 30000);
+
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const htmlElement = document.documentElement;
+            
+            // Load saved theme or default to dark
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            htmlElement.setAttribute('data-theme', savedTheme);
+            themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+            
+            // Toggle theme
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+            });
+        </script>
+    </body>
+</html>
