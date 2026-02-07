@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="AUTHOR" content="Vivo6810">
+        <meta name="onemainworld" content="minecraft server">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png" href="images/favicon-32x32.png">
+        <title>ONEMAINWORLD - FAQ</title>
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <h2 class="nav-title">ONEMAINWORLD</h2>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rules.html">Rules</a></li>
+                    <li><a href="https://onemainworld-shop.fourthwall.com/?utm_source=linktree&utm_medium=referral&utm_campaign=linktree_shop_other_products">Merch</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="https://discord.gg/UcVYUmC7" target="_blank">Discord</a></li>
+                    <li><a href="https://www.instagram.com/onemainworld?igsh=MWVzdGdiajJwN2gwag==" id="insta-link-faq" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://youtube.com/@onemainworld?si=96TIcCY_Vne8jfEo" id="yt-link-faq" target="_blank">YouTube</a></li>
+                    <li><a href="https://onemainworld-shop.tebex.io" >Shop</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><button class="theme-toggle" id="themeToggle" title="Toggle Dark/Light Mode">🌙</button></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="rules-section">
+                <h1 class="rules-title">Facts & Questions</h1>
+                <p class="rules-intro">Quick answers to common questions. Edit these answers in <strong>faq.html</strong> as needed.</p>
+
+                <div class="rules-container">
+                    <div class="rule-card">
+                        <div class="rule-number">Q</div>
+                        <div class="rule-content">
+                            <h3>Does the server support both Java and Bedrock?</h3>
+                            <p>Answer: Yes — the server supports both Java Edition and Bedrock Edition. Use <strong>onemainworld.net</strong> for both; Bedrock port is <strong>19132</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-number">Q</div>
+                        <div class="rule-content">
+                            <h3>Is there a land-claim system?</h3>
+                            <p>Answer: Yes — the server uses a Golden Shovel land-claim system. To claim an area, hold a golden shovel and click two opposite corners (click on the block faces at two diagonal corners). The plugin will register the area between those two points as your claim. To manage or remove claims, use the server's claim tools or contact staff for help.</p>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-number">Q</div>
+                        <div class="rule-content">
+                            <h3>Does the server have /tpa or teleport requests?</h3>
+                            <p>Answer: Yes — teleport request commands like <code>/tpa</code> are enabled. Use responsibly and follow server rules when teleporting to other players.</p>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-number">Q</div>
+                        <div class="rule-content">
+                            <h3>How do I report griefing or rule breaks?</h3>
+                            <p>Answer: Join our Discord (link in the nav) and report to staff with screenshots and world coordinates where possible.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="rules-footer">
+                    <a href="index.html" class="back-button">Back to Home</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const htmlElement = document.documentElement;
+            
+            // Load saved theme or default to dark
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            htmlElement.setAttribute('data-theme', savedTheme);
+            themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+            
+            // Toggle theme
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+            });
+        </script>
+    </body>
+</html>
